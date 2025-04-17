@@ -1,17 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "menu.h"
+#include "lista.h"
 
-
-// Funções do Menu
+/* Comando de compilação do projeto:
+gcc -o projeto *.c structs/*.c -I. -Istructs
+*/
 
 int main(){
     char opcao;
+
+    Lista* listaRegistro = criar_lista();
     
     do{
         printf("Menu de Opcoes:\n");
         printf("\n");
-        printf("1. Cadastrar\n");
+        printf("1. Registros de Pacientes\n");
         printf("2. Atendimento\n");
         printf("3. Atendimento Prioritario\n");
         printf("4. Pesquisa\n");
@@ -19,7 +23,7 @@ int main(){
         printf("0. Sair\n\n");
 
 
-        printf("Digite o número da opcao desejada: ");
+        printf("Digite o numero da opcao desejada: ");
         scanf("%c", &opcao);
         clearBuffer();
 
@@ -27,7 +31,7 @@ int main(){
 
         switch (opcao){
         case '1':
-            cadastrar();
+            registros(listaRegistro);
             break;
         case '2':
             atendimento();
