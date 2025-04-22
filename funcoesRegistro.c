@@ -47,3 +47,33 @@ CodErros NovoRegistro(Lista* list){
 
     return OK;
 }
+
+CodErros consultarPaciente(Lista* lista) {
+    char rgBusca[RG_MEX_LEN];
+    printf("Digite o RG do paciente a ser consultado: ");
+    fgets(rgBusca, RG_MEX_LEN, stdin);
+    rgBusca[strcspn(rgBusca, "\n")] = '\0';
+
+    ELista* atual = lista->inicio;
+
+    while (atual != NULL) {
+        Registro* reg = atual->dados;
+
+        if (strcmp(reg->RG, rgBusca) == 0) {
+            printf("\nPaciente encontrado:\n");
+            printf("Nome: %s\n", reg->Nome);
+            printf("Idade: %d\n", reg->Idade);
+            printf("RG: %s\n", reg->RG);
+            printf("Data de entrada: %02d/%02d/%04d\n\n",
+                reg->Entrada->dia,
+                reg->Entrada->mes,
+                reg->Entrada->ano);
+            return OK;
+        }
+
+        atual = atual->proximo;
+    }
+
+    printf("Paciente com RG %s nao encontrado.\n\n", rgBusca);
+    return ERRO;
+}

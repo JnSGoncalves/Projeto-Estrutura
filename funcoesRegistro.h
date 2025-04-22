@@ -5,5 +5,6 @@
 
 // Funções
 CodErros NovoRegistro();
+CodErros consultarPaciente(Lista* lista);
 
 #endif

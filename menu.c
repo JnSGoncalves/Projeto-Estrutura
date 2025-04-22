@@ -36,7 +36,7 @@ int registros(Lista* lista){
             Erro = NovoRegistro(lista);
             break;
         case '2':
-            printf("Consultar paciente cadastrado selecionado.\n");
+            Erro = consultarPaciente(lista);
             break;
         case '3':
             printf("Lista de pacientes registrados:\n\n");
