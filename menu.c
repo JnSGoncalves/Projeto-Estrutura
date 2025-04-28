@@ -46,7 +46,7 @@ int registros(Lista* lista){
             Erro = atualizarPaciente(lista);
             break;
         case '5':
-            printf("Remover paciente selecionado.\n");
+            Erro = removerPaciente(lista);
             break;
         default:
             printf("Opcao invalida. Tente novamente.\n");

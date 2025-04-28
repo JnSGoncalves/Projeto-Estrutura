@@ -7,6 +7,7 @@
 CodErros NovoRegistro();
 CodErros consultarPaciente(Lista* lista);
 CodErros atualizarPaciente(Lista* lista);
+CodErros removerPaciente(Lista* lista);
 
 
 #endif

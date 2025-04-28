@@ -118,3 +118,43 @@ CodErros atualizarPaciente(Lista* lista) {
     printf("Paciente com RG %s nao encontrado.\n\n", rgBusca);
     return ERRO;
 }
+
+CodErros removerPaciente(Lista* lista) {
+    if (lista->qtd == 0) {
+        printf("Lista vazia. Nenhum paciente para remover.\n\n");
+        return ERRO;
+    }
+
+    char rgBusca[RG_MEX_LEN];
+    printf("Digite o RG do paciente a ser removido: ");
+    fgets(rgBusca, RG_MEX_LEN, stdin);
+    rgBusca[strcspn(rgBusca, "\n")] = '\0';
+
+    ELista* atual = lista->inicio;
+    ELista* anterior = NULL;
+
+    while (atual != NULL) {
+        if (strcmp(atual->dados->RG, rgBusca) == 0) {
+            if (anterior == NULL) {
+                // O paciente a ser removido é o primeiro da lista
+                lista->inicio = atual->proximo;
+            } else {
+                anterior->proximo = atual->proximo;
+            }
+
+            free(atual->dados->Entrada);
+            free(atual->dados);
+            free(atual);
+            lista->qtd--;
+
+            printf("Paciente removido com sucesso!\n\n");
+            return OK;
+        }
+
+        anterior = atual;
+        atual = atual->proximo;
+    }
+
+    printf("Paciente com RG %s nao encontrado.\n\n", rgBusca);
+    return ERRO;
+}
