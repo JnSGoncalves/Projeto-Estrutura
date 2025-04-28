@@ -43,7 +43,7 @@ int registros(Lista* lista){
             mostrar(lista);
             break;
         case '4':
-            printf("Atualizar dados de paciente selecionado.\n");
+            Erro = atualizarPaciente(lista);
             break;
         case '5':
             printf("Remover paciente selecionado.\n");

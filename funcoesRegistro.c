@@ -77,3 +77,44 @@ CodErros consultarPaciente(Lista* lista) {
     printf("Paciente com RG %s nao encontrado.\n\n", rgBusca);
     return ERRO;
 }
+
+CodErros atualizarPaciente(Lista* lista) {
+    char rgBusca[RG_MEX_LEN];
+    printf("Digite o RG do paciente a ser atualizado: ");
+    fgets(rgBusca, RG_MEX_LEN, stdin);
+    rgBusca[strcspn(rgBusca, "\n")] = '\0';
+
+    ELista* atual = lista->inicio;
+
+    while (atual != NULL) {
+        Registro* reg = atual->dados;
+
+        if (strcmp(reg->RG, rgBusca) == 0) {
+            printf("\nPaciente encontrado. Dados atuais:\n");
+            printf("Nome: %s\n", reg->Nome);
+            printf("Idade: %d\n", reg->Idade);
+
+            char novoNome[Nome_MAX_LEN];
+            int novaIdade;
+
+            printf("\nDigite o novo nome: ");
+            fgets(novoNome, Nome_MAX_LEN, stdin);
+            novoNome[strcspn(novoNome, "\n")] = '\0';
+
+            printf("Digite a nova idade: ");
+            scanf("%d", &novaIdade);
+            clearBuffer();
+
+            strcpy(reg->Nome, novoNome);
+            reg->Idade = novaIdade;
+
+            printf("Dados atualizados com sucesso!\n\n");
+            return OK;
+        }
+
+        atual = atual->proximo;
+    }
+
+    printf("Paciente com RG %s nao encontrado.\n\n", rgBusca);
+    return ERRO;
+}
