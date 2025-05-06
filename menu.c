@@ -1,17 +1,58 @@
 #include "menu.h"
+#include "lista.h"
+#include "funcoesRegistro.h"
 #include <structs/registro.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-// Cadastrar
+// Registros
 // Atendimento
 //  |_Desfazer (Dentro do atendimento)
 // Atendimento Prioritário
 // Pesquisa
 // Carregar / Salvar
+// Sobre
 
-int cadastrar(){
-    printf("Funcao cadastrar executada.\n");
+int registros(Lista* lista){
+    char opcao;
+
+    printf("Selecione uma operacao:\n");
+    printf("1. Cadastrar novo paciente\n");
+    printf("2. Consultar paciente cadastrado\n");
+    printf("3. Mostrar lista completa\n");
+    printf("4. Atualizar dados de paciente\n");
+    printf("5. Remover paciente\n\n");
+
+    printf("Escolha uma opcao: ");
+
+    scanf("%c", &opcao);
+    clearBuffer();
+
+    printf("\n");
+    
+    CodErros Erro;
+    switch (opcao) {
+        case '1':
+            Erro = NovoRegistro(lista);
+            break;
+        case '2':
+            Erro = consultarPaciente(lista);
+            break;
+        case '3':
+            printf("Lista de pacientes registrados:\n\n");
+            mostrar(lista);
+            break;
+        case '4':
+            Erro = atualizarPaciente(lista);
+            break;
+        case '5':
+            Erro = removerPaciente(lista);
+            break;
+        default:
+            printf("Opcao invalida. Tente novamente.\n");
+            break;
+    }
+
     return 0;
 }
 

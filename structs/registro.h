@@ -1,6 +1,10 @@
+#ifndef REGISTRO_H
+#define REGISTRO_H
+
 #define Nome_MAX_LEN 50
 #define RG_MEX_LEN 12
 
+// Estruturas
 typedef struct{
     int dia;
     int mes;
@@ -14,3 +18,7 @@ typedef struct{
     Data* Entrada;
 } Registro;
 
+// Funções
+Registro* criarRegistro(char nome[Nome_MAX_LEN], int idade, char rg[RG_MEX_LEN], int dia, int mes, int ano);
+
+#endif
