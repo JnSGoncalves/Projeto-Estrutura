@@ -1,8 +1,4 @@
 #include "heap.h"
-#include "registro.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
 
 int filho_esq(int pai) { 
     return 2*pai + 1;
@@ -16,18 +12,18 @@ int pai(int filho) {
     return (int) floor((filho - 1)/2);
 }
 
-int ultimo_pai(heap *h) { 
+int ultimo_pai(Heap *h) { 
     return (int) floor((h->qtde / 2)) - 1;
 }
 
-void peneirar(heap *h, int pai) {
+void peneirar(Heap *h, int pai) {
     int dir = filho_dir(pai);
     if(dir >= h->qtde)
-        dir = pai;
+    dir = pai;
     int esq = filho_esq(pai);
     if(esq >= h->qtde)
-        esq = pai;
-
+    esq = pai;
+    
     int maior;
     maior = h->dados[dir]->Idade > h->dados[pai]->Idade ? dir : pai;
     maior = h->dados[esq]->Idade > h->dados[maior]->Idade ? esq : maior;
@@ -35,7 +31,7 @@ void peneirar(heap *h, int pai) {
     if(maior == pai){
         return;
     }
-
+    
     Registro *paiValor = h->dados[pai];
     h->dados[pai] = h->dados[maior];
     h->dados[maior] = paiValor;
@@ -43,30 +39,37 @@ void peneirar(heap *h, int pai) {
     peneirar(h, maior);
 }
 
-void mostrar(heap *h) {
+void mostrarHeap(Heap *h) {
     for(int i = 0; i < h->qtde; i++){
-        printf("%d ", h->dados[i]->Idade);
+        printf("    Nome: %s, Idade: %d, RG: %s, Data de registro: %d/%d/%d\n", 
+            h->dados[i]->Nome, 
+            h->dados[i]->Idade,
+            h->dados[i]->RG,
+            h->dados[i]->Entrada->dia,
+            h->dados[i]->Entrada->mes,
+            h->dados[i]->Entrada->ano
+        );
     }
     printf("\n");
 }
 
-void construir(heap *h) {
+void construir(Heap *h) {
     for(int i = ultimo_pai(h); i >= 0; i--){
         peneirar(h, i);
     }
 }
 
-void inserir(heap *h, Registro *valor) {
+void inserirHeap(Heap *h, Registro *valor) {
     h->dados[h->qtde++] = valor;
     construir(h);
 }
 
-Registro* remover(heap *h) {
+Registro* removerHeap(Heap *h) {
     if (h->qtde == 0)
         return NULL;
 
     Registro *prim = h->dados[0];
     h->dados[0] = h->dados[--h->qtde];
-    construir(h);
+    peneirar(h, 0);
     return prim;
 }

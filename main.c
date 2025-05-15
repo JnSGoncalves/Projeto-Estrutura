@@ -10,6 +10,9 @@ gcc -o projeto *.c structs/*.c -I. -Istructs
 int main(){
     char opcao;
 
+    Heap* prioridade = malloc(sizeof(Heap));
+    prioridade->qtde = 0;
+    
     Lista* listaRegistro = criar_lista();
     
     do{
@@ -37,7 +40,7 @@ int main(){
             atendimento();
             break;
         case '3':
-            atendimentoPrioritario();
+            atendimentoPrioritario(listaRegistro, prioridade);
             break;
         case '4':
             pesquisa();
