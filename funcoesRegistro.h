@@ -4,7 +4,7 @@
 #include "menu.h"
 
 // Funções
-CodErros NovoRegistro();
+CodErros NovoRegistro(Lista* list);
 CodErros consultarPaciente(Lista* lista);
 CodErros atualizarPaciente(Lista* lista);
 CodErros removerPaciente(Lista* lista);

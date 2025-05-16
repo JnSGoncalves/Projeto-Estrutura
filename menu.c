@@ -1,7 +1,7 @@
 #include "menu.h"
 #include "lista.h"
 #include "funcoesRegistro.h"
-#include <structs/registro.h>
+#include "registro.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -39,8 +39,12 @@ int registros(Lista* lista){
             Erro = consultarPaciente(lista);
             break;
         case '3':
-            printf("Lista de pacientes registrados:\n\n");
-            mostrar(lista);
+            if(lista->qtd != 0){
+                printf("Lista de pacientes registrados:\n\n");
+                mostrar(lista);
+            }else{
+                Erro = LISTA_VAZIA;
+            }
             break;
         case '4':
             Erro = atualizarPaciente(lista);
@@ -53,6 +57,8 @@ int registros(Lista* lista){
             break;
     }
 
+    tratErros(Erro);
+
     return 0;
 }
 
@@ -61,8 +67,44 @@ int atendimento(){
     return 0;
 }
 
-int atendimentoPrioritario(){
-    printf("Funcao atendimentoPrioritario executada.\n");
+int atendimentoPrioritario(Lista *lista, Heap *prioridade){
+    char opcao;
+
+    printf("Selecione uma operacao:\n");
+    printf("1. Enfileirar paciente - Prioridade\n");
+    printf("2. Desenfileirar paciente - Prioridade\n");
+    printf("3. Mostrar fila completa - Prioridade\n\n");
+
+    printf("Escolha uma opcao: ");
+
+    scanf("%c", &opcao);
+    clearBuffer();
+
+    printf("\n");
+    
+    CodErros Erro;
+    switch (opcao) {
+        case '1':
+            Erro = enfileirarPrioridade(prioridade, lista);
+            break;
+        case '2':
+            Erro = desenfileirarPrioridade(prioridade);
+            break;
+        case '3':
+            if(prioridade->qtde != 0){
+                printf("Lista de pacientes registrados:\n\n");
+                mostrarHeap(prioridade);
+            }else{
+                Erro = FILA_VAZIA;
+            }
+            break;
+        default:
+            printf("Opcao invalida. Tente novamente.\n");
+            break;
+    }
+
+    tratErros(Erro);
+
     return 0;
 }
 
@@ -79,4 +121,24 @@ int carregar_salvar(){
 void clearBuffer() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
+}
+
+void tratErros(CodErros erro){
+    switch (erro){
+        case NAO_ENCONTRADO:
+            printf("Paciente não cadastrado.\n");
+            break;
+        case ERRO:
+            printf("Erro ao realizar a operação.\n");
+            break;
+        case FILA_VAZIA:
+            printf("Fila vazia.\n");
+            break;
+        case LISTA_VAZIA:
+            printf("Lista vazia.\n");
+            break;
+    default:
+        break;
+    }
+    printf("\n");
 }
