@@ -37,7 +37,7 @@ int main(){
             registros(listaRegistro);
             break;
         case '2':
-            atendimento();
+            atendimento(listaRegistro);
             break;
         case '3':
             atendimentoPrioritario(listaRegistro, prioridade);
