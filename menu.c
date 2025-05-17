@@ -65,6 +65,8 @@ int registros(Lista* lista){
 }
 
 int atendimento(Lista* lista){
+    static Fila* filaAtendimento = NULL;
+
     if (filaAtendimento == NULL) {
         filaAtendimento = criar_fila();
     }
