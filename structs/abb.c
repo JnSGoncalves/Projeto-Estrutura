@@ -61,7 +61,7 @@ ABB *cria_ABB() {
     return nova;
 }
 
-void inserirPorIdade(ABB* arvore, Registro* dados) {
+void abbInserirPorIdade(ABB* arvore, Registro* dados) {
     EABB* novo = cria_EABB(dados);
     
     EABB* anterior = NULL;
@@ -79,6 +79,90 @@ void inserirPorIdade(ABB* arvore, Registro* dados) {
     novo->pai = anterior;
     if(anterior != NULL) {
         if(dados->Idade <= anterior->dados->Idade) {
+            anterior->esq = novo;
+        } else {
+            anterior->dir = novo;
+        }
+    } else {
+        arvore->raiz = novo;
+    }
+    arvore->qtde++;
+}
+
+void abbInserirPorAno(ABB* arvore, Registro* dados) {
+    EABB* novo = cria_EABB(dados);
+    
+    EABB* anterior = NULL;
+    EABB* atual = arvore->raiz;
+
+    while(atual != NULL) {
+        anterior = atual;
+        if(dados->Entrada->ano <= atual->dados->Entrada->ano) {
+            atual = atual->esq;
+        } else {
+            atual = atual->dir;
+        }
+    }
+
+    novo->pai = anterior;
+    if(anterior != NULL) {
+        if(dados->Entrada->ano <= anterior->dados->Entrada->ano) {
+            anterior->esq = novo;
+        } else {
+            anterior->dir = novo;
+        }
+    } else {
+        arvore->raiz = novo;
+    }
+    arvore->qtde++;
+}
+
+void abbInserirPorMes(ABB* arvore, Registro* dados) {
+    EABB* novo = cria_EABB(dados);
+    
+    EABB* anterior = NULL;
+    EABB* atual = arvore->raiz;
+
+    while(atual != NULL) {
+        anterior = atual;
+        if(dados->Entrada->mes <= atual->dados->Entrada->mes) {
+            atual = atual->esq;
+        } else {
+            atual = atual->dir;
+        }
+    }
+
+    novo->pai = anterior;
+    if(anterior != NULL) {
+        if(dados->Entrada->mes <= anterior->dados->Entrada->mes) {
+            anterior->esq = novo;
+        } else {
+            anterior->dir = novo;
+        }
+    } else {
+        arvore->raiz = novo;
+    }
+    arvore->qtde++;
+}
+
+void abbInserirPorDia(ABB* arvore, Registro* dados) {
+    EABB* novo = cria_EABB(dados);
+    
+    EABB* anterior = NULL;
+    EABB* atual = arvore->raiz;
+
+    while(atual != NULL) {
+        anterior = atual;
+        if(dados->Entrada->dia <= atual->dados->Entrada->dia) {
+            atual = atual->esq;
+        } else {
+            atual = atual->dir;
+        }
+    }
+
+    novo->pai = anterior;
+    if(anterior != NULL) {
+        if(dados->Entrada->dia <= anterior->dados->Entrada->dia) {
             anterior->esq = novo;
         } else {
             anterior->dir = novo;

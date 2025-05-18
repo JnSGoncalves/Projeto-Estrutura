@@ -43,11 +43,11 @@ CodErros NovoRegistro(Lista* list, ABB* abbList[4]){
     Registro* novo = criarRegistro(nome, idade, rg, dia, mes, ano);
     inserir(list, novo);
 
-    // Inserção as árvores de pesquisa
-    inserirPorIdade(abbList[IDADE], novo);
-    // inserirPorAno(abbList[ANO], novo);
-    // inserirPorMes(abbList[MES], novo);
-    // inserirPorDia(abbList[DIA], novo);
+    // Inserção nas árvores de pesquisa
+    abbInserirPorIdade(abbList[IDADE], novo);
+    abbInserirPorAno(abbList[ANO], novo);
+    abbInserirPorMes(abbList[MES], novo);
+    abbInserirPorDia(abbList[DIA], novo);
 
 
     printf("Paciente registrado com sucesso!\n\n");
@@ -82,7 +82,7 @@ CodErros consultarPaciente(Lista* lista) {
     }
 
     printf("Paciente com RG %s nao encontrado.\n\n", rgBusca);
-    return ERRO;
+    return NAO_ENCONTRADO;
 }
 
 CodErros atualizarPaciente(Lista* lista) {
@@ -123,7 +123,7 @@ CodErros atualizarPaciente(Lista* lista) {
     }
 
     printf("Paciente com RG %s nao encontrado.\n\n", rgBusca);
-    return ERRO;
+    return NAO_ENCONTRADO;
 }
 
 CodErros removerPaciente(Lista* lista, ABB* abbList[4]) {
@@ -148,11 +148,11 @@ CodErros removerPaciente(Lista* lista, ABB* abbList[4]) {
                 anterior->proximo = atual->proximo;
             }
 
-            // Inserção as árvores de pesquisa
+            // Remoção das árvores de pesquisa
             abbRemoverPorRegistro(abbList[IDADE], atual->dados);
-            // abbRemoverPorRegistro(abbList[ANO], atual);
-            // abbRemoverPorRegistro(abbList[MES], atual);
-            // abbRemoverPorRegistro(abbList[DIA], atual);
+            abbRemoverPorRegistro(abbList[ANO], atual->dados);
+            abbRemoverPorRegistro(abbList[MES], atual->dados);
+            abbRemoverPorRegistro(abbList[DIA], atual->dados);
 
             free(atual->dados->Entrada);
             free(atual->dados);
@@ -168,5 +168,5 @@ CodErros removerPaciente(Lista* lista, ABB* abbList[4]) {
     }
 
     printf("Paciente com RG %s nao encontrado.\n\n", rgBusca);
-    return ERRO;
+    return NAO_ENCONTRADO;
 }
