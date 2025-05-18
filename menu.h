@@ -13,7 +13,7 @@ typedef enum {OK, NAO_ENCONTRADO, FILA_VAZIA, LISTA_VAZIA, ERRO} CodErros;
 #include "funcoesPrioridade.h"
 
 int registros(Lista* lista);
-int atendimento();
+int atendimento(Lista* lista);
 int atendimentoPrioritario();
 int pesquisa();
 int carregar_salvar();
