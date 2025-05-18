@@ -15,7 +15,7 @@
 // Carregar / Salvar
 // Sobre
 
-int registros(Lista* lista){
+int registros(Lista* lista, ABB* abbList[4]){
     char opcao;
 
     printf("Selecione uma operacao:\n");
@@ -35,7 +35,7 @@ int registros(Lista* lista){
     CodErros Erro;
     switch (opcao) {
         case '1':
-            Erro = NovoRegistro(lista);
+            Erro = NovoRegistro(lista, abbList);
             break;
         case '2':
             Erro = consultarPaciente(lista);
@@ -52,7 +52,7 @@ int registros(Lista* lista){
             Erro = atualizarPaciente(lista);
             break;
         case '5':
-            Erro = removerPaciente(lista);
+            Erro = removerPaciente(lista, abbList);
             break;
         default:
             printf("Opcao invalida. Tente novamente.\n");
@@ -145,8 +145,59 @@ int atendimentoPrioritario(Lista *lista, Heap *prioridade){
     return 0;
 }
 
-int pesquisa(){
-    printf("Funcao pesquisa executada.\n");
+int pesquisa(ABB* abbList[4]){
+    char opcao;
+
+    printf("Selecione uma operacao:\n");
+    printf("1. Mostrar Registros ordenados por Ano\n");
+    printf("2. Mostrar Registros ordenados por Mes\n");
+    printf("3. Mostrar Registros ordenados por Dia\n");
+    printf("4. Mostrar Registros ordenados por Idade\n\n");
+
+    printf("Escolha uma opcao: ");
+
+    scanf("%c", &opcao);
+    clearBuffer();
+
+    printf("\n");
+    
+    CodErros Erro = OK;
+    switch (opcao) {
+        case '1':
+            if(abbList[ANO]->raiz != NULL){
+                in_ordem(abbList[ANO]->raiz);
+            }else{
+                Erro = LISTA_VAZIA;
+            }
+            break;
+        case '2':
+            if(abbList[MES]->raiz != NULL){
+                in_ordem(abbList[MES]->raiz);
+            }else{
+                Erro = LISTA_VAZIA;
+            }
+            break;
+        case '3':
+            if(abbList[DIA]->raiz != NULL){
+                in_ordem(abbList[DIA]->raiz);
+            }else{
+                Erro = LISTA_VAZIA;
+            }
+            break;
+        case '4':
+            if(abbList[IDADE]->raiz != NULL){
+                in_ordem(abbList[IDADE]->raiz);
+            }else{
+                Erro = LISTA_VAZIA;
+            }
+            break;
+        default:
+            printf("Opcao invalida. Tente novamente.\n");
+            break;
+    }
+
+    tratErros(Erro);
+
     return 0;
 }
 
