@@ -15,7 +15,7 @@ typedef enum {ANO, MES, DIA, IDADE} AbbIndex;
 #include "funcoesPrioridade.h"
 
 int registros(Lista* lista, ABB* abbList[4]);
-int atendimento();
+int atendimento(Lista* lista);
 int atendimentoPrioritario(Lista *lista, Heap *prioridade);
 int pesquisa(ABB* abbList[4]);
 int carregar_salvar();

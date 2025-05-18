@@ -2,8 +2,10 @@
 #include "lista.h"
 #include "funcoesRegistro.h"
 #include "registro.h"
+#include "funcoesFila.h"
 #include <stdlib.h>
 #include <stdio.h>
+
 
 // Registros
 // Atendimento
@@ -62,8 +64,43 @@ int registros(Lista* lista, ABB* abbList[4]){
     return 0;
 }
 
-int atendimento(){
-    printf("Funcao atendimento executada.\n");
+int atendimento(Lista* lista){
+    static Fila* filaAtendimento = NULL;
+
+    if (filaAtendimento == NULL) {
+        filaAtendimento = criar_fila();
+    }
+
+    char opcao;
+
+    printf("Selecione uma operacao:\n");
+    printf("1. Enfileirar paciente\n");
+    printf("2. Chamar próximo paciente\n");
+    printf("3. Mostrar fila de atendimento\n\n");
+
+    printf("Escolha uma opcao: ");
+    scanf("%c", &opcao);
+    clearBuffer();
+
+    printf("\n");
+    
+    CodErros Erro;
+    switch (opcao) {
+        case '1':
+            Erro = adicionarPacienteNaFila(lista, filaAtendimento);
+            break;
+        case '2':
+            Erro = chamarProximoPaciente(filaAtendimento);
+            break;
+        case '3':
+            Erro = exibirFilaDeAtendimento(filaAtendimento);
+            break;
+        default:
+            printf("Opcao invalida. Tente novamente.\n");
+            return 0;
+    }
+
+    tratErros(Erro);
     return 0;
 }
 

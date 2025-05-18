@@ -44,7 +44,7 @@ int main(){
             registros(listaRegistro, abbList);
             break;
         case '2':
-            atendimento();
+            atendimento(listaRegistro);
             break;
         case '3':
             atendimentoPrioritario(listaRegistro, prioridade);
