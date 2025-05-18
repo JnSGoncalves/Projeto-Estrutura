@@ -4,10 +4,9 @@
 #include "menu.h"
 
 // Funções
-CodErros NovoRegistro(Lista* list);
+CodErros NovoRegistro(Lista* list, ABB* abbList[4]);
 CodErros consultarPaciente(Lista* lista);
 CodErros atualizarPaciente(Lista* lista);
-CodErros removerPaciente(Lista* lista);
-
+CodErros removerPaciente(Lista* lista, ABB* abbList[4]);
 
 #endif

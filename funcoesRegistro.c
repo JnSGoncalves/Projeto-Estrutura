@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-CodErros NovoRegistro(Lista* list){
+CodErros NovoRegistro(Lista* list, ABB* abbList[4]){
     char nome[Nome_MAX_LEN];
     int idade;
     char rg[RG_MEX_LEN];
@@ -42,6 +42,13 @@ CodErros NovoRegistro(Lista* list){
 
     Registro* novo = criarRegistro(nome, idade, rg, dia, mes, ano);
     inserir(list, novo);
+
+    // Inserção as árvores de pesquisa
+    inserirPorIdade(abbList[IDADE], novo);
+    // inserirPorAno(abbList[ANO], novo);
+    // inserirPorMes(abbList[MES], novo);
+    // inserirPorDia(abbList[DIA], novo);
+
 
     printf("Paciente registrado com sucesso!\n\n");
 
@@ -119,7 +126,7 @@ CodErros atualizarPaciente(Lista* lista) {
     return ERRO;
 }
 
-CodErros removerPaciente(Lista* lista) {
+CodErros removerPaciente(Lista* lista, ABB* abbList[4]) {
     if (lista->qtd == 0) {
         printf("Lista vazia. Nenhum paciente para remover.\n\n");
         return ERRO;
@@ -136,11 +143,16 @@ CodErros removerPaciente(Lista* lista) {
     while (atual != NULL) {
         if (strcmp(atual->dados->RG, rgBusca) == 0) {
             if (anterior == NULL) {
-                // O paciente a ser removido é o primeiro da lista
                 lista->inicio = atual->proximo;
             } else {
                 anterior->proximo = atual->proximo;
             }
+
+            // Inserção as árvores de pesquisa
+            abbRemoverPorRegistro(abbList[IDADE], atual->dados);
+            // abbRemoverPorRegistro(abbList[ANO], atual);
+            // abbRemoverPorRegistro(abbList[MES], atual);
+            // abbRemoverPorRegistro(abbList[DIA], atual);
 
             free(atual->dados->Entrada);
             free(atual->dados);

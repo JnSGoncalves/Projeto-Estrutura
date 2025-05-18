@@ -14,6 +14,13 @@ int main(){
     prioridade->qtde = 0;
     
     Lista* listaRegistro = criar_lista();
+
+    ABB* abbList[4] = {
+        cria_ABB(), // Por ano
+        cria_ABB(), // Por mes
+        cria_ABB(), // Por dia
+        cria_ABB()  // Por Idade
+    };
     
     do{
         printf("Menu de Opcoes:\n");
@@ -34,7 +41,7 @@ int main(){
 
         switch (opcao){
         case '1':
-            registros(listaRegistro);
+            registros(listaRegistro, abbList);
             break;
         case '2':
             atendimento();
@@ -43,7 +50,7 @@ int main(){
             atendimentoPrioritario(listaRegistro, prioridade);
             break;
         case '4':
-            pesquisa();
+            pesquisa(abbList);
             break;
         case '5':
             carregar_salvar();
