@@ -221,7 +221,14 @@ int carregar_salvar(){
 }
 
 int sobre(){
-    return 0;
+    printf("\n=== SOBRE O PROJETO ===\n");
+    printf("Desenvolvedores:\n");
+    printf("- Vinícius do Nascimento Generoso | RA: 22.123.103-8\n");
+    printf("- Jônatas da Silva Gonçalves      | RA: 22.123.095-6\n");
+    printf("Ciclo: 4º\n");
+    printf("Curso: Ciência da Computação\n");
+    printf("Disciplina: Estrutura de Dados\n");
+    printf("Data: Maio de 2025\n\n");
 }
 
 void clearBuffer() {
