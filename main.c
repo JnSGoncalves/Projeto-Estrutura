@@ -58,7 +58,7 @@ int main(){
             pesquisa(abbList);
             break;
         case '5':
-            carregar_salvar();
+            carregar_salvar(listaRegistro);
             break;
         case '6':
             sobre();
