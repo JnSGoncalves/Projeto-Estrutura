@@ -3,6 +3,7 @@
 #include "funcoesRegistro.h"
 #include "registro.h"
 #include "funcoesFila.h"
+#include "arquivo.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -201,8 +202,32 @@ int pesquisa(ABB* abbList[4]){
     return 0;
 }
 
-int carregar_salvar(){
-    printf("Funcao carregar_salvar executada.\n");
+int carregar_salvar(Lista* lista){
+    char opcao;
+    char nomeArquivo[] = "pacientes.txt";
+
+    printf("Operacoes:\n");
+    printf("1. Carregar pacientes do arquivo\n");
+    printf("2. Salvar pacientes no arquivo\n");
+    printf("Escolha uma opcao: ");
+    scanf(" %c", &opcao);
+    clearBuffer();
+
+    CodErros Erro;
+
+    switch (opcao) {
+        case '1':
+            Erro = carregarPacientes(lista, nomeArquivo);
+            break;
+        case '2':
+            Erro = salvarPacientes(lista, nomeArquivo);
+            break;
+        default:
+            printf("Opcao invalida.\n");
+            return 0;
+    }
+
+    tratErros(Erro);
     return 0;
 }
 
