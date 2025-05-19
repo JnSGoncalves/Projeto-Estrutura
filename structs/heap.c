@@ -41,7 +41,7 @@ void peneirar(Heap *h, int pai) {
 
 void mostrarHeap(Heap *h) {
     for(int i = 0; i < h->qtde; i++){
-        printf("    Nome: %s, Idade: %d, RG: %s, Data de registro: %d/%d/%d\n", 
+        printf("    Nome: %s, Idade: %d, RG: %s, Data de registro: %02d/%02d/%04d\n", 
             h->dados[i]->Nome, 
             h->dados[i]->Idade,
             h->dados[i]->RG,

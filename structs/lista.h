@@ -20,5 +20,6 @@ Lista *criar_lista();
 void inserir(Lista *lista, Registro* reg);
 void remover(Lista *lista, char rg[RG_MEX_LEN]);
 void mostrar(Lista *lista);
+int existeNaLista(Lista *lista, const char rg[RG_MEX_LEN]);
 
 #endif

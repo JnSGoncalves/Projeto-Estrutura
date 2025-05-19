@@ -76,7 +76,7 @@ void mostrar(Lista *lista){
     }
 
     while(atual != NULL){
-        printf("%d - Nome: %s, Idade: %d, RG: %s, Data de registro: %d/%d/%d\n", 
+        printf("%d - Nome: %s, Idade: %d, RG: %s, Data de registro: %02d/%02d/%04d\n", 
             cont,
             atual->dados->Nome, 
             atual->dados->Idade,
@@ -89,4 +89,17 @@ void mostrar(Lista *lista){
         cont++;
     }
     printf("\n");
+}
+
+int existeNaLista(Lista *lista, const char rg[RG_MEX_LEN]) {
+    ELista *atual = lista->inicio;
+
+    while (atual != NULL) {
+        if (strcmp(atual->dados->RG, rg) == 0) {
+            return 1;
+        }
+        atual = atual->proximo;
+    }
+
+    return 0;
 }

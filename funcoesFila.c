@@ -18,15 +18,15 @@ CodErros adicionarPacienteNaFila(Lista* lista, Fila* fila) {
         atual = atual->proximo;
     }
 
-    printf("Paciente com RG %s nao encontrado.\n\n", rgBusca);
-    return ERRO;
+    printf("Paciente com RG %s nao encontrado.\n", rgBusca);
+    return NAO_ENCONTRADO;
 }
 
 CodErros chamarProximoPaciente(Fila* fila) {
     Registro* paciente = desenfileirar(fila);
     if (paciente == NULL) {
-        printf("Fila vazia. Nenhum paciente para atender.\n\n");
-        return ERRO;
+        printf("Nenhum paciente para atender.\n\n");
+        return FILA_VAZIA;
     }
 
     printf("Chamando o próximo paciente:\n");
@@ -44,25 +44,33 @@ CodErros exibirFilaDeAtendimento(Fila* fila) {
 }
 
 CodErros desfazerAtendimento(Fila* fila){
-    char op = logOp->top->dados->tipo == ENFILEIRAR ? '+' : '-';
+    if(logOp->top != NULL){
+        char op = logOp->top->dados->tipo == ENFILEIRAR ? '+' : '-';
 
-    printf("Ultima operacao: %c, Paciente: %s, RG: %s\n", 
-        op, 
-        logOp->top->dados->reg->Nome, 
-        logOp->top->dados->reg->Nome
-    );
+        printf("Ultima operacao: %c, Paciente: %s, RG: %s\n", 
+            op, 
+            logOp->top->dados->reg->Nome, 
+            logOp->top->dados->reg->Nome
+        );
 
-    printf("Deseja desfazer a ultima operacao realizada na Fila de Atendimento? (S/N): ");
-    char opcao;
-    scanf("%c", &opcao);
-    clearBuffer();
+        printf("Deseja desfazer a ultima operacao realizada na Fila de Atendimento? (S/N): ");
+        char opcao;
+        scanf("%c", &opcao);
+        clearBuffer();
 
-    if (opcao == 's' || opcao == 'S'){
-        desfazer(fila);
+        if (opcao == 's' || opcao == 'S'){
+            CodErros erro = desfazer(fila);
 
-        printf("Operacao desfeita.\n\n");
-        return OK;
+            if(erro == OK){
+                printf("Operacao desfeita.\n\n");
+                return OK;
+            }else{
+                return erro;
+            }
+        }else{
+            return OP_CANCELADA;
+        }
     }else{
-        return OP_CANCELADA;
+        return PILHA_VAZIA;
     }
 }

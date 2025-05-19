@@ -220,6 +220,10 @@ int carregar_salvar(){
     return 0;
 }
 
+int sobre(){
+    return 0;
+}
+
 void clearBuffer() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
@@ -244,6 +248,9 @@ void tratErros(CodErros erro){
             break;
         case OP_CANCELADA:
             printf("Operação cancelada.\n");
+            break;
+        case JA_CADASTRADO:
+            printf("Paciente já cadastrado.\n");
             break;
     default:
         break;

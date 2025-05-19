@@ -33,7 +33,8 @@ int main(){
         printf("2. Atendimento\n");
         printf("3. Atendimento Prioritario\n");
         printf("4. Pesquisa\n");
-        printf("5. Carregar / Salvar\n");
+        printf("5. Carregar/Salvar\n");
+        printf("6. Sobre\n");
         printf("0. Sair\n\n");
 
 
@@ -58,6 +59,9 @@ int main(){
             break;
         case '5':
             carregar_salvar();
+            break;
+        case '6':
+            sobre();
             break;
         case '0':
             printf("Saindo...");
