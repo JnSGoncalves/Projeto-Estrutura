@@ -1,6 +1,4 @@
 #include "fila.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 Fila *criar_fila() {
     Fila *fila = malloc(sizeof(Fila));
@@ -23,6 +21,9 @@ void enfileirar(Fila *fila, Registro *paciente) {
 
     fila->tail = nova;
     fila->qtde++;
+
+    Operacao* op = criarOp(ENFILEIRAR, paciente);
+    push(logOp, op);
 }
 
 Registro *desenfileirar(Fila *fila) {
@@ -40,6 +41,9 @@ Registro *desenfileirar(Fila *fila) {
     if (fila->qtde == 0) {
         fila->tail = NULL;
     }
+
+    Operacao* op = criarOp(DESENFILEIRAR, paciente);
+    push(logOp, op);
 
     return paciente;
 }
@@ -59,4 +63,42 @@ void mostrar_fila(Fila *fila) {
             reg->Entrada->dia, reg->Entrada->mes, reg->Entrada->ano);
         atual = atual->proximo;
     }
+}
+
+void desfazer(Fila *fila) {
+    if (logOp->qtde == 0) return;
+
+    Operacao* op = pop(logOp);
+
+    if (op->tipo == ENFILEIRAR) {
+        if (fila->head == fila->tail) {
+            free(fila->head);
+            fila->head = fila->tail = NULL;
+        } else {
+            CelulaFila* atual = fila->head;
+            CelulaFila* anterior = NULL;
+
+            while (atual->proximo != NULL){
+                anterior = atual;
+                atual = atual->proximo;
+            }
+
+            anterior->proximo = NULL;
+            fila->tail = anterior;
+            free(atual);
+        }
+        fila->qtde--;
+    } else {
+        CelulaFila *nova = malloc(sizeof(CelulaFila));
+        nova->paciente = op->reg;
+        nova->proximo = fila->head;
+
+        fila->head = nova;
+        if (fila->tail == NULL) {
+            fila->tail = nova;
+        }
+        fila->qtde++;
+    }
+
+    free(op);
 }

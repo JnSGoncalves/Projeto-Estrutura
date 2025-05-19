@@ -6,7 +6,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-
 // Registros
 // Atendimento
 //  |_Desfazer (Dentro do atendimento)
@@ -44,6 +43,7 @@ int registros(Lista* lista, ABB* abbList[4]){
             if(lista->qtd != 0){
                 printf("Lista de pacientes registrados:\n\n");
                 mostrar(lista);
+                Erro = OK;
             }else{
                 Erro = LISTA_VAZIA;
             }
@@ -76,7 +76,9 @@ int atendimento(Lista* lista){
     printf("Selecione uma operacao:\n");
     printf("1. Enfileirar paciente\n");
     printf("2. Chamar próximo paciente\n");
-    printf("3. Mostrar fila de atendimento\n\n");
+    printf("3. Mostrar fila de atendimento\n");
+    printf("4. Mostrar Log das ultimas operações na Fila\n");
+    printf("5. Desfazer última operação\n\n");
 
     printf("Escolha uma opcao: ");
     scanf("%c", &opcao);
@@ -94,6 +96,17 @@ int atendimento(Lista* lista){
             break;
         case '3':
             Erro = exibirFilaDeAtendimento(filaAtendimento);
+            break;
+        case '4':
+            if(logOp->qtde != 0){
+                printf("Operacoes cadastradas:\n");
+                mostrar_pilha(logOp);
+                Erro = OK;
+            }else
+                Erro = PILHA_VAZIA;
+            break;
+        case '5':
+            Erro = desfazerAtendimento(filaAtendimento);
             break;
         default:
             printf("Opcao invalida. Tente novamente.\n");
@@ -131,6 +144,7 @@ int atendimentoPrioritario(Lista *lista, Heap *prioridade){
             if(prioridade->qtde != 0){
                 printf("Lista de pacientes registrados:\n\n");
                 mostrarHeap(prioridade);
+                Erro = OK;
             }else{
                 Erro = FILA_VAZIA;
             }
@@ -224,6 +238,12 @@ void tratErros(CodErros erro){
             break;
         case LISTA_VAZIA:
             printf("Lista vazia.\n");
+            break;
+        case PILHA_VAZIA:
+            printf("Pilha vazia.\n");
+            break;
+        case OP_CANCELADA:
+            printf("Operação cancelada.\n");
             break;
     default:
         break;

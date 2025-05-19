@@ -4,6 +4,9 @@
 #define Nome_MAX_LEN 50
 #define RG_MEX_LEN 12
 
+#include <stdlib.h>
+#include <string.h>
+
 // Estruturas
 typedef struct{
     int dia;
