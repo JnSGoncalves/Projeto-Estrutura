@@ -43,5 +43,26 @@ CodErros exibirFilaDeAtendimento(Fila* fila) {
     return OK;
 }
 
+CodErros desfazerAtendimento(Fila* fila){
+    char op = logOp->top->dados->tipo == ENFILEIRAR ? '+' : '-';
 
+    printf("Ultima operacao: %c, Paciente: %s, RG: %s\n", 
+        op, 
+        logOp->top->dados->reg->Nome, 
+        logOp->top->dados->reg->Nome
+    );
 
+    printf("Deseja desfazer a ultima operacao realizada na Fila de Atendimento? (S/N): ");
+    char opcao;
+    scanf("%c", &opcao);
+    clearBuffer();
+
+    if (opcao == 's' || opcao == 'S'){
+        desfazer(fila);
+
+        printf("Operacao desfeita.\n\n");
+        return OK;
+    }else{
+        return OP_CANCELADA;
+    }
+}

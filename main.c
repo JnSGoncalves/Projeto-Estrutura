@@ -3,6 +3,8 @@
 #include "menu.h"
 #include "lista.h"
 
+Pilha* logOp = NULL;
+
 /* Comando de compilação do projeto:
 gcc -o projeto *.c structs/*.c -I. -Istructs
 */
@@ -12,6 +14,8 @@ int main(){
 
     Heap* prioridade = malloc(sizeof(Heap));
     prioridade->qtde = 0;
+
+    logOp = criar_pilha();
     
     Lista* listaRegistro = criar_lista();
 

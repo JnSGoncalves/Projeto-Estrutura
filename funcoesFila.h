@@ -8,5 +8,6 @@
 CodErros adicionarPacienteNaFila(Lista* lista, Fila* fila);
 CodErros chamarProximoPaciente(Fila* fila);
 CodErros exibirFilaDeAtendimento(Fila* fila);
+CodErros desfazerAtendimento(Fila* fila);
 
 #endif
