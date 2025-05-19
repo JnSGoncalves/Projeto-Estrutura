@@ -22,6 +22,6 @@ Fila *criar_fila();
 void enfileirar(Fila *fila, Registro *paciente);
 Registro *desenfileirar(Fila *fila);
 void mostrar_fila(Fila *fila);
-void desfazer(Fila *fila);
+CodErros desfazer(Fila *fila);
 
 #endif

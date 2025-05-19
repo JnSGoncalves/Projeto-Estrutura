@@ -3,7 +3,7 @@
 void in_ordem(EABB *raiz) {
     if (raiz != NULL) {
         in_ordem(raiz->esq);
-        printf("    Nome: %s, Idade: %d, RG: %s, Data de registro: %d/%d/%d\n", 
+        printf("    Nome: %s, Idade: %d, RG: %s, Data de registro: %02d/%02d/%04d\n", 
             raiz->dados->Nome, 
             raiz->dados->Idade,
             raiz->dados->RG,
@@ -15,9 +15,10 @@ void in_ordem(EABB *raiz) {
     }
 }
 
-// void pre_ordem(EABB *raiz) {
+// void ng_ordem(EABB *raiz) {
 //     if (raiz != NULL) {
-//         printf("    Nome: %s, Idade: %d, RG: %s, Data de registro: %d/%d/%d\n", 
+//         ng_ordem(raiz->dir);
+//         printf("    Nome: %s, Idade: %d, RG: %s, Data de registro: %02d/%02d/%04d\n", 
 //             raiz->dados->Nome, 
 //             raiz->dados->Idade,
 //             raiz->dados->RG,
@@ -25,23 +26,7 @@ void in_ordem(EABB *raiz) {
 //             raiz->dados->Entrada->mes,
 //             raiz->dados->Entrada->ano
 //         );
-//         pre_ordem(raiz->esq);
-//         pre_ordem(raiz->dir);
-//     }
-// }
-
-// void pos_ordem(EABB *raiz) {
-//     if (raiz != NULL) {
-//         pos_ordem(raiz->esq);
-//         pos_ordem(raiz->dir);
-//         printf("    Nome: %s, Idade: %d, RG: %s, Data de registro: %d/%d/%d\n", 
-//             raiz->dados->Nome, 
-//             raiz->dados->Idade,
-//             raiz->dados->RG,
-//             raiz->dados->Entrada->dia,
-//             raiz->dados->Entrada->mes,
-//             raiz->dados->Entrada->ano
-//         );
+//         ng_ordem(raiz->esq);
 //     }
 // }
 

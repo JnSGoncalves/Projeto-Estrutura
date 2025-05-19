@@ -18,8 +18,7 @@ typedef struct ABB {
 } ABB;
 
 void in_ordem(EABB* raiz);
-// void pre_ordem(EABB* raiz);
-// void pos_ordem(EABB* raiz);
+// void ng_ordem(EABB *raiz);
 EABB* cria_EABB(Registro* dados);
 ABB* cria_ABB();
 void abbInserirPorIdade(ABB* arvore, Registro* dados);

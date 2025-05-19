@@ -15,6 +15,14 @@ CodErros NovoRegistro(Lista* list, ABB* abbList[4]){
     int ano;
 
     printf("Digite os dados do paciente a ser cadastrado:\n\n");
+    
+    printf("RG: ");
+    fgets(rg, RG_MEX_LEN, stdin);
+    rg[strcspn(rg, "\n")] = '\0';
+
+    if(existeNaLista(list, rg) == 1){
+        return JA_CADASTRADO;
+    }
 
     printf("Nome: ");
     fgets(nome, Nome_MAX_LEN, stdin);
@@ -24,9 +32,6 @@ CodErros NovoRegistro(Lista* list, ABB* abbList[4]){
     scanf("%d", &idade);
     clearBuffer();
 
-    printf("RG: ");
-    fgets(rg, RG_MEX_LEN, stdin);
-    rg[strcspn(rg, "\n")] = '\0';
 
     printf("Digite o dia de entrada: ");
     scanf("%d", &dia);
@@ -81,7 +86,7 @@ CodErros consultarPaciente(Lista* lista) {
         atual = atual->proximo;
     }
 
-    printf("Paciente com RG %s nao encontrado.\n\n", rgBusca);
+    printf("Paciente com RG %s nao encontrado.\n", rgBusca);
     return NAO_ENCONTRADO;
 }
 
@@ -122,14 +127,14 @@ CodErros atualizarPaciente(Lista* lista) {
         atual = atual->proximo;
     }
 
-    printf("Paciente com RG %s nao encontrado.\n\n", rgBusca);
+    printf("Paciente com RG %s nao encontrado.\n", rgBusca);
     return NAO_ENCONTRADO;
 }
 
 CodErros removerPaciente(Lista* lista, ABB* abbList[4]) {
     if (lista->qtd == 0) {
-        printf("Lista vazia. Nenhum paciente para remover.\n\n");
-        return ERRO;
+        printf("Nenhum paciente para remover.\n");
+        return LISTA_VAZIA;
     }
 
     char rgBusca[RG_MEX_LEN];
@@ -167,6 +172,6 @@ CodErros removerPaciente(Lista* lista, ABB* abbList[4]) {
         atual = atual->proximo;
     }
 
-    printf("Paciente com RG %s nao encontrado.\n\n", rgBusca);
+    printf("Paciente com RG %s nao encontrado.\n", rgBusca);
     return NAO_ENCONTRADO;
 }

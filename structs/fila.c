@@ -65,40 +65,46 @@ void mostrar_fila(Fila *fila) {
     }
 }
 
-void desfazer(Fila *fila) {
-    if (logOp->qtde == 0) return;
+CodErros desfazer(Fila *fila) {
+    if (logOp->qtde == 0) return PILHA_VAZIA;
 
     Operacao* op = pop(logOp);
 
-    if (op->tipo == ENFILEIRAR) {
-        if (fila->head == fila->tail) {
-            free(fila->head);
-            fila->head = fila->tail = NULL;
-        } else {
-            CelulaFila* atual = fila->head;
-            CelulaFila* anterior = NULL;
-
-            while (atual->proximo != NULL){
-                anterior = atual;
-                atual = atual->proximo;
+    if(op != NULL){
+        if (op->tipo == ENFILEIRAR) {
+            if (fila->head == fila->tail) {
+                free(fila->head);
+                fila->head = fila->tail = NULL;
+            } else {
+                CelulaFila* atual = fila->head;
+                CelulaFila* anterior = NULL;
+    
+                while (atual->proximo != NULL){
+                    anterior = atual;
+                    atual = atual->proximo;
+                }
+    
+                anterior->proximo = NULL;
+                fila->tail = anterior;
+                free(atual);
             }
-
-            anterior->proximo = NULL;
-            fila->tail = anterior;
-            free(atual);
+            fila->qtde--;
+        } else {
+            CelulaFila *nova = malloc(sizeof(CelulaFila));
+            nova->paciente = op->reg;
+            nova->proximo = fila->head;
+    
+            fila->head = nova;
+            if (fila->tail == NULL) {
+                fila->tail = nova;
+            }
+            fila->qtde++;
         }
-        fila->qtde--;
-    } else {
-        CelulaFila *nova = malloc(sizeof(CelulaFila));
-        nova->paciente = op->reg;
-        nova->proximo = fila->head;
 
-        fila->head = nova;
-        if (fila->tail == NULL) {
-            fila->tail = nova;
-        }
-        fila->qtde++;
+        free(op);
+
+        return OK;
     }
 
-    free(op);
+    return PILHA_VAZIA;
 }
