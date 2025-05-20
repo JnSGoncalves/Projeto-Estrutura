@@ -22,7 +22,7 @@ int registros(Lista* lista, ABB* abbList[4]);
 int atendimento(Lista* lista);
 int atendimentoPrioritario(Lista *lista, Heap *prioridade);
 int pesquisa(ABB* abbList[4]);
-int carregar_salvar();
+int carregar_salvar(Lista* lista, ABB* abbList[4]);
 int sobre();
 void clearBuffer();
 void tratErros(CodErros erro);

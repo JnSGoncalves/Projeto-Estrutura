@@ -18,10 +18,12 @@ CodErros salvarPacientes(Lista* lista, const char* nomeArquivo) {
     }
 
     fclose(arq);
+
+    printf("Dados salvos com sucesso!\n");
     return OK;
 }
 
-CodErros carregarPacientes(Lista* lista, const char* nomeArquivo) {
+CodErros carregarPacientes(Lista* lista, const char* nomeArquivo, ABB* abbList[4]) {
     FILE* arq = fopen(nomeArquivo, "r");
     if (arq == NULL) {
         return ERRO;
@@ -35,8 +37,15 @@ CodErros carregarPacientes(Lista* lista, const char* nomeArquivo) {
     while (fscanf(arq, "%[^;];%d;%[^;];%d;%d;%d\n", nome, &idade, rg, &dia, &mes, &ano) == 6) {
         Registro* novo = criarRegistro(nome, idade, rg, dia, mes, ano);
         inserir(lista, novo);
+
+        abbInserirPorIdade(abbList[IDADE], novo);
+        abbInserirPorAno(abbList[ANO], novo);
+        abbInserirPorMes(abbList[MES], novo);
+        abbInserirPorDia(abbList[DIA], novo);
     }
 
     fclose(arq);
+
+    printf("Dados carregados com sucesso!\n");
     return OK;
 }
