@@ -216,7 +216,7 @@ int pesquisa(ABB* abbList[4]){
     return 0;
 }
 
-int carregar_salvar(Lista* lista){
+int carregar_salvar(Lista* lista, ABB* abbList[4]){
     char opcao;
     char nomeArquivo[] = "pacientes.txt";
 
@@ -231,7 +231,7 @@ int carregar_salvar(Lista* lista){
 
     switch (opcao) {
         case '1':
-            Erro = carregarPacientes(lista, nomeArquivo);
+            Erro = carregarPacientes(lista, nomeArquivo, abbList);
             break;
         case '2':
             Erro = salvarPacientes(lista, nomeArquivo);

@@ -5,6 +5,6 @@
 #include "menu.h"
 
 CodErros salvarPacientes(Lista* lista, const char* nomeArquivo);
-CodErros carregarPacientes(Lista* lista, const char* nomeArquivo);
+CodErros carregarPacientes(Lista* lista, const char* nomeArquivo, ABB* abbList[4]);
 
 #endif
